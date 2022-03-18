@@ -26,18 +26,20 @@ namespace elte_populacio_szimulacio
 
         public void Szimuláció(int lépésszám, bool debug)
         {
-            Diagnosztika();
+  //          Diagnosztika();
+            Diagnosztika_Korcsoport_sorba();
             for (int i = 0; i < lépésszám; i++)
             {
                 Szimulációs_lépés();
-                Diagnosztika();
-                Diagnosztika_Korcsoport();
+//                Diagnosztika();
+                Diagnosztika_Korcsoport_sorba();
             }
         }
 
         public void Szimulációs_lépés()
         {
-            for (int i = 0; i < T.Count; i++)
+            int N = T.Count;
+            for (int i = 0; i < N; i++)
             {
                 if (Véletlen < H[T[i]])
                 {
@@ -48,7 +50,7 @@ namespace elte_populacio_szimulacio
                 {
                     if (Véletlen < Sz[T[i]])
                     {
-                        T.Add(0);
+                        T.Add(1);
                     //  Console.WriteLine($"{i} megszült.");
                     }
                     T[i]++;
@@ -94,6 +96,16 @@ namespace elte_populacio_szimulacio
                 Console.WriteLine($"{i+1} éves: {korcsoportos_sűrűségfüggvény[i]} db");
 
         }
+
+
+        public void Diagnosztika_Korcsoport_sorba()
+        {
+            int[] korcsoportos_sűrűségfüggvény = Korcsoportonkénti_sűrűségfüggvény();
+            for (int i = 0; i < korcsoportos_sűrűségfüggvény.Length; i++)
+                Console.Write($"[{i + 1}] {korcsoportos_sűrűségfüggvény[i]}\t");
+            Console.WriteLine();
+        }
+
 
     }
 }
