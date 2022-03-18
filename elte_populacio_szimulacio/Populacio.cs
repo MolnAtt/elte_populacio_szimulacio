@@ -31,6 +31,7 @@ namespace elte_populacio_szimulacio
             {
                 Szimulációs_lépés();
                 Diagnosztika();
+                Diagnosztika_Korcsoport();
             }
         }
 
@@ -47,11 +48,11 @@ namespace elte_populacio_szimulacio
                 {
                     if (Véletlen < Sz[T[i]])
                     {
-                        T.Add(1);
+                        T.Add(0);
                     //  Console.WriteLine($"{i} megszült.");
                     }
-
                     T[i]++;
+
                 }
             }
             Tömörítés();
@@ -75,5 +76,24 @@ namespace elte_populacio_szimulacio
                 Console.WriteLine();
             }
         }
+
+        public int[] Korcsoportonkénti_sűrűségfüggvény()
+        {
+            int[] sűrűségfüggvény = new int[H.Length];
+
+            foreach (int item in T)
+                sűrűségfüggvény[item-1]++;
+
+            return sűrűségfüggvény;
+        }
+
+        public void Diagnosztika_Korcsoport()
+        {
+            int[] korcsoportos_sűrűségfüggvény = Korcsoportonkénti_sűrűségfüggvény();
+            for (int i = 0; i < korcsoportos_sűrűségfüggvény.Length; i++)
+                Console.WriteLine($"{i+1} éves: {korcsoportos_sűrűségfüggvény[i]} db");
+
+        }
+
     }
 }
