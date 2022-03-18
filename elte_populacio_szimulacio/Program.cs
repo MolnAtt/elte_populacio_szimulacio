@@ -10,15 +10,11 @@ namespace elte_populacio_szimulacio
     {
         static void Main(string[] args)
         {
-            double[] H = new double[] { 0.1, 0.2, 0.2, 0.2, 1 };
-            double[] Sz = new double[] { 0.1, 0.2, 0.2, 0.2, 0 };
-            Populacio P = new Populacio(H, Sz, 10);
+            double[] H = new double[] { 0.1, 0.2, 0.3, 0.4, 1 };
+            double[] Sz = new double[] { 0.3, 0.4, 0.6, 0.3, 0.2 };
+            Populacio P = new Populacio(H, Sz, 100, true);
 
-            for (int i = 0; i < 10; i++)
-            {
-                P.Szimulációs_lépés();
-                P.Diagnosztika();
-            }
+            P.Szimuláció(20, true);
 
             Console.ReadKey();
         }
