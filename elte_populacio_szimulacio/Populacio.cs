@@ -26,16 +26,41 @@ namespace elte_populacio_szimulacio
 
         public void Szimuláció(int lépésszám, bool debug)
         {
-  //          Diagnosztika();
+            //          Diagnosztika();
             Diagnosztika_Korcsoport_sorba();
             for (int i = 0; i < lépésszám; i++)
             {
                 Szimulációs_lépés();
-//                Diagnosztika();
+                //                Diagnosztika();
+
+                Console.Write($"{Populáció}:\t\t");
                 Diagnosztika_Korcsoport_sorba();
+                Console.WriteLine();
             }
         }
 
+
+        public void Szimuláció_Katasztrófáig(int lépésszám, bool debug)
+        {
+            //          Diagnosztika();
+            Diagnosztika_Korcsoport_sorba();
+            int i = 0;
+            while (0<Populáció && Populáció<10000)
+            {
+                Szimulációs_lépés();
+                //                Diagnosztika();
+
+                Console.Write($"({i++})\t{Populáció} fő:\t\t");
+                Diagnosztika_Korcsoport_sorba();
+                Console.WriteLine();
+            }
+
+            if (Populáció==0)
+                Console.WriteLine("A populáció kihalt.");
+            else
+                Console.WriteLine("A populáció túlszaporodott.");
+
+        }
         public void Szimulációs_lépés()
         {
             int N = T.Count;
@@ -103,9 +128,9 @@ namespace elte_populacio_szimulacio
             int[] korcsoportos_sűrűségfüggvény = Korcsoportonkénti_sűrűségfüggvény();
             for (int i = 0; i < korcsoportos_sűrűségfüggvény.Length; i++)
                 Console.Write($"[{i + 1}] {korcsoportos_sűrűségfüggvény[i]}\t");
-            Console.WriteLine();
         }
 
+        public int Populáció { get => T.Count; }
 
     }
 }
